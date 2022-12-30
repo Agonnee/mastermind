@@ -1,5 +1,6 @@
 from dataclasses import dataclass
-from api_handler import API_Handler
+
+from src.api_handler import API_Handler
 
 @dataclass
 class GameController():
@@ -8,7 +9,7 @@ class GameController():
     def play_game(self):
         
         answer, username = self.game_start()
-        print(answer)
+        print(answer) #debugging only
         for i in range(10):
             game_over = False
             game_over = self.turn(i+1, answer)
@@ -29,12 +30,15 @@ class GameController():
         answer_len = len(answer)
         guess = self.obtain_guess(guess_number, answer_len)
         correct_right_loc, correct_wrong_loc = self.compare_guess_to_answer(guess, answer)
+        if correct_right_loc == answer_len:
+            return True
         print(f"Nice Try, You got {correct_right_loc} right in the correct location and {correct_wrong_loc} right in the wrong location.")
+        return False
 
     def obtain_guess(self, guess_number, answer_len):
         guess_valid = False
         while not guess_valid:
-            guess = input(f"nter guess number {guess_number}: ")
+            guess = input(f"Enter guess number {guess_number}: ")
             if len(guess) == answer_len and guess.isnumeric():
                 guess_valid = True
             else:

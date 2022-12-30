@@ -1,12 +1,4 @@
-""" from dotenv import load_dotenv
-import os """
 import requests
-
-""" 
-load_dotenv()
-
-API_KEY = os.getenv("API_KEY") or "" """
-
 
 class API_Handler:
 

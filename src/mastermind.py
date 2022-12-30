@@ -1,5 +1,5 @@
-from api_handler import API_Handler
-from gamecontroller import GameController
+from src.api_handler import API_Handler
+from src.gamecontroller import GameController
 
 def main():
     mastermind = GameController(API_Handler())
