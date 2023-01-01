@@ -16,7 +16,11 @@ class GameController():
             if game_over:
                 break
 
-        self.game_end()
+        play_again = input(f'Would you like to play again? (Y/n) ')
+        if play_again.lower() in ["y", "yeah", "yes"]:
+            return True
+        else:
+            return False
 
     def game_start(self):
         print("Welcome to Mastermind! \nYou are tasked with cracking the secret code!")
@@ -61,10 +65,3 @@ class GameController():
                 correct_wrong_location += 1
         
         return correct_right_location, correct_wrong_location
-
-
-    def game_end(self):
-        pass
-
-    def prompt_play_again(self):
-        pass
