@@ -3,6 +3,7 @@ import requests
 import requests_mock
 from src.api_handler import API_Handler
 
+
 def test_get_req():
     """Expect to raise a RequestException"""
 
@@ -16,6 +17,7 @@ def test_get_req():
         with pytest.raises(requests.exceptions.RequestException) as exc:
             test_handler.get_code()
 
+
 def test_get_code_http_err():
     """Expect to raise an HTTPError"""
 
@@ -27,6 +29,7 @@ def test_get_code_http_err():
         mocker.get(API_URL, exc=requests.exceptions.HTTPError)
         with pytest.raises(requests.exceptions.HTTPError):
             test_handler.get_code()
+
 
 def test_get_code_con_err():
     """Expect to raise a ConnectionError"""
@@ -41,6 +44,7 @@ def test_get_code_con_err():
         with pytest.raises(requests.exceptions.ConnectionError) as exc:
             test_handler.get_code()
 
+
 def test_get_code_timeout():
     """Expect to raise a Timeout"""
 
@@ -53,6 +57,7 @@ def test_get_code_timeout():
 
         with pytest.raises(requests.exceptions.Timeout) as exc:
             test_handler.get_code()
+
 
 def test_get_code_correct():
     """Expect to Return a 4-digit string."""
@@ -68,5 +73,3 @@ def test_get_code_correct():
         response = test_handler.get_code()
 
     assert response == "0001"
-
-
