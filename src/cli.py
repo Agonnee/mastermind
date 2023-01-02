@@ -8,6 +8,7 @@ class Cli:
         print("Welcome to Mastermind!")
         print("You are tasked with cracking the secret code!")
         print("The code consists of 4 digits, between 0 and 7")
+        print("Note, there may be duplicate numbers in the code.")
         print("After each guess, you'll receive feedback on your guess")
         print("Using the feedback, figure out the secret code!")
         print("Be warned, you only have 10 guesses...")

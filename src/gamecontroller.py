@@ -14,7 +14,6 @@ class GameController:
 
         answer = self.game_start()
         username = self.ui.pick_player_name()
-        print(answer)  # debugging only
         game_won = False
         for i in range(10):
             game_won = self.turn(i + 1, answer)
