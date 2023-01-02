@@ -11,9 +11,6 @@ class API_Handler:
             response.raise_for_status()
             secret_code = response.text.strip().replace("\n", "")
             return secret_code
-        except requests.exceptions.RequestException as err:
-            print("An error has occurred: ", err)
-            raise
         except requests.exceptions.HTTPError as err_http:
             print("An HTTP error has occurred: ", err_http)
             raise
@@ -22,4 +19,7 @@ class API_Handler:
             raise
         except requests.exceptions.Timeout as err_time:
             print("Timeout Error has occurred: ", err_time)
+            raise
+        except requests.exceptions.RequestException as err:
+            print("An error has occurred: ", err)
             raise

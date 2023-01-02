@@ -4,11 +4,6 @@ from pytest import MonkeyPatch
 import pytest
 
 
-def test_display_feedback() -> None:
-    test_cli = Cli()
-    pass
-
-
 def test_pick_play_name(monkeypatch: MonkeyPatch) -> None:
     test_cli = Cli()
     input_name = "Test_Name"
