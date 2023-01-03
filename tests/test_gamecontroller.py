@@ -7,12 +7,15 @@ import requests_mock
 import pytest
 
 
-def test_game_start() -> None:
+def test_game_start(monkeypatch: MonkeyPatch) -> None:
     controller = GameController(API_Handler(), Cli())
 
     API_URL = "https://www.random.org/integers/?num=4&min=0&max=7&col=1&base=10&format=plain&rnd=new"
 
     body_text = "0\n0\n0\n1\n\n"
+
+    input_values = ["1", "Test_Name"]
+    monkeypatch.setattr("builtins.input", lambda _: input_values.pop(0))
 
     with requests_mock.Mocker() as mocker:
         mocker.get(API_URL, status_code=200, text=body_text)
@@ -22,30 +25,23 @@ def test_game_start() -> None:
 
 
 def test_play_game_win(monkeypatch: MonkeyPatch) -> None:
-    input_value = "9999"
-    monkeypatch.setattr("builtins.input", lambda _: input_value)
+    
+    input_values = ["1", "Test_Name", "9999", "n"]
+    test_answer = "9999"
+    monkeypatch.setattr("builtins.input", lambda _: input_values.pop(0))
+    monkeypatch.setattr(API_Handler, "get_code", lambda _, __, ___: test_answer)
+
     controller = GameController(API_Handler(), Cli())
-
-    API_URL = "https://www.random.org/integers/?num=4&min=0&max=7&col=1&base=10&format=plain&rnd=new"
-
-    body_text = "9\n9\n9\n9\n\n"
-
-    with requests_mock.Mocker() as mocker:
-        mocker.get(API_URL, status_code=200, text=body_text)
-        controller.play_game()
+    controller.play_game()
 
 def test_play_game_lose(monkeypatch: MonkeyPatch) -> None:
-    input_value = "4334"
-    monkeypatch.setattr("builtins.input", lambda _: input_value)
+    input_values = ["1", "Test_Name", "9998", "9998", "9998", "9998", "9998", "9998", "9998", "9998", "9998", "9998", "n"]
+    test_answer = "9999"
+    monkeypatch.setattr("builtins.input", lambda _: input_values.pop(0))
+    monkeypatch.setattr(API_Handler, "get_code", lambda _, __, ___: test_answer)
+
     controller = GameController(API_Handler(), Cli())
-
-    API_URL = "https://www.random.org/integers/?num=4&min=0&max=7&col=1&base=10&format=plain&rnd=new"
-
-    body_text = "3\n4\n4\n3\n\n"
-
-    with requests_mock.Mocker() as mocker:
-        mocker.get(API_URL, status_code=200, text=body_text)
-        controller.play_game()
+    controller.play_game()
 
 def test_turn_match(monkeypatch: MonkeyPatch) -> None:
     input_value = "0000"

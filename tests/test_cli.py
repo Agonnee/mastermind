@@ -1,5 +1,7 @@
 from src.cli import Cli
+from src.difficulty import Difficulty
 from pytest import MonkeyPatch
+
 
 import pytest
 

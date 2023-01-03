@@ -1,7 +1,13 @@
 from typing import Protocol
-
+from src.difficulty import Difficulty
 
 class UI(Protocol):
+    def choose_difficulty(self) -> Difficulty:
+        """
+        Prompt the Player for a difficulty setting for the game.
+        Returns a Difficulty obj from the difficulty enum
+        """
+
     def display_rules(self) -> None:
         """Display the Game rules upon start"""
 

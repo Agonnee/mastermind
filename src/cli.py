@@ -1,5 +1,23 @@
+from src.difficulty import Difficulty
+
 class Cli:
     """Implementing the UI Protocol to create simple CLI"""
+
+    def choose_difficulty(self) -> Difficulty:
+        """
+        Prompt the Player for a difficulty setting for the game.
+        Returns a Difficulty obj from the difficulty enum
+        """
+        print("Difficulty selection:")
+        for count, i in enumerate(Difficulty, 1):
+            print(f"{count}. {i.value}, {i.code_length} digit code with digits ranging 0-{i.digit_max}")
+        while True:
+            try:
+                choice = int(input("Enter a difficulty setting. (1-4): "))
+                if 0 < choice < len(Difficulty) + 1:
+                    return list(Difficulty)[choice - 1]
+            except ValueError:
+                print("Please choose a valid difficulty.")
 
     def display_rules(self) -> None:
         """Print the Games rules at the beginning of the game"""
@@ -7,7 +25,6 @@ class Cli:
         print("================================================")
         print("Welcome to Mastermind!")
         print("You are tasked with cracking the secret code!")
-        print("The code consists of 4 digits, between 0 and 7")
         print("Note, there may be duplicate numbers in the code.")
         print("After each guess, you'll receive feedback on your guess")
         print("Using the feedback, figure out the secret code!")

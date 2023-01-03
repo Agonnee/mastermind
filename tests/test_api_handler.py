@@ -14,7 +14,7 @@ def test_get_req():
     with requests_mock.Mocker() as mocker:
         mocker.get(API_URL, exc=requests.exceptions.RequestException)
 
-        with pytest.raises(requests.exceptions.RequestException) as exc:
+        with pytest.raises(requests.exceptions.RequestException):
             test_handler.get_code()
 
 
@@ -41,7 +41,7 @@ def test_get_code_con_err():
     with requests_mock.Mocker() as mocker:
         mocker.get(API_URL, exc=requests.exceptions.ConnectionError)
 
-        with pytest.raises(requests.exceptions.ConnectionError) as exc:
+        with pytest.raises(requests.exceptions.ConnectionError):
             test_handler.get_code()
 
 
@@ -55,7 +55,7 @@ def test_get_code_timeout():
     with requests_mock.Mocker() as mocker:
         mocker.get(API_URL, exc=requests.exceptions.Timeout)
 
-        with pytest.raises(requests.exceptions.Timeout) as exc:
+        with pytest.raises(requests.exceptions.Timeout):
             test_handler.get_code()
 
 

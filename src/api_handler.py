@@ -2,11 +2,15 @@ import requests
 
 
 class API_Handler:
-    def get_code(self) -> str:
+    def get_code(self, code_length: int = 4, digit_max: int = 7) -> str:
+        """
+        Takes Secret Code Length (default 4, 4-8), and Max value of a digit (default 7, 7-9)
+        Returns a str of the secret code.
+        """
 
         try:
             response = requests.get(
-                "https://www.random.org/integers/?num=4&min=0&max=7&col=1&base=10&format=plain&rnd=new"
+                f"https://www.random.org/integers/?num={code_length}&min=0&max={digit_max}&col=1&base=10&format=plain&rnd=new"
             )
             response.raise_for_status()
             secret_code = response.text.strip().replace("\n", "")
