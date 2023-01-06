@@ -1,5 +1,8 @@
 # Mastermind
 Mastermind Game created for the LinkedIn REACH Apprenticeship Program.
+
+Thank you to the REACH team and anyone else for taking the time to review this project, it has been rewarding to create. Learning to code has been one of the most exciting journeys I've had since I made the jump into working in technology. Transitioning from writing scripts for automation of simple tasks to building a project that can be iterated upon and extended makes me excited to see where my journey goes from here, and I thank you for the opportunity to be considered for the LinkedIn REACH apprenticeship program.
+
 Created By: Hunter Moffitt
 
 ## About
@@ -19,7 +22,7 @@ After 10 guesses, if you haven't cracked the code, you have lost and the code wi
 
 ### Initial Setup
 1. Create a new directory. 
-2. In the terminal change directory into your new repo directory
+2. In the terminal change directory into your new repo directory (Enter your directory's path)
    ```bash
    cd path/to/repo_dir
    ```
@@ -31,7 +34,7 @@ After 10 guesses, if you haven't cracked the code, you have lost and the code wi
    ```bash
    python -m venv env
    ```
-5. Active the virtual environment by running the activate script from the ./env/Scripts/ subdirectory:
+5. Active the virtual environment by running the activate script from the .\env\Scripts\ subdirectory:
 
    - Windows cmd.exe
      ```bash
@@ -82,5 +85,5 @@ I decided that having the CLI print statements and prompting for input was causi
 
 As an additional feature, I wanted to add a difficulty setting. The difficulty setting would change the number of digits in the code and the range of numbers possible for each digit. In order to make this modular I created the Difficulty Enum so that difficulties could be added or modified without much effort by editing the values of difficulty.
 
-Currently, I'm planning on adding a scoring
+Currently, I'm planning on adding a scoring system to record the best score (least number of guesses) a player has acheived per difficulty and a leaderboard for the different difficulties.
 
