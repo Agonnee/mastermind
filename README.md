@@ -58,10 +58,15 @@ After 10 guesses, if you haven't cracked the code, you have lost and the code wi
    ```bash
    python mastermind.py
    ```
+   (Note: To run the game you will need to activate the virtual environment as shown in inital setup step 5 if not currently active.)
 2. Following the prompts, choose a difficulty setting and enter your player name.
 3. You will then be prompted for your first guess, enter your first guess and hit enter.
 4. The Game will give you feed back on your guess.
 5. Using the feedback given, continue to make guesses until you win, or the game is over.
+6. Once the game is over, and you are done replaying, you can deactivate the virtual environment.
+   ```bash
+   deactivate
+   ```
 
 
 ## Development Process and Tools
