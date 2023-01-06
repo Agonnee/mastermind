@@ -1,6 +1,7 @@
 from typing import Protocol
 from src.difficulty import Difficulty
 
+
 class UI(Protocol):
     def choose_difficulty(self) -> Difficulty:
         """

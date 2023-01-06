@@ -1,5 +1,6 @@
 from src.difficulty import Difficulty
 
+
 class Cli:
     """Implementing the UI Protocol to create simple CLI"""
 
@@ -10,7 +11,9 @@ class Cli:
         """
         print("Difficulty selection:")
         for count, i in enumerate(Difficulty, 1):
-            print(f"{count}. {i.value}, {i.code_length} digit code with digits ranging 0-{i.digit_max}")
+            print(
+                f"{count}. {i.value}, {i.code_length} digit code with digits ranging 0-{i.digit_max}"
+            )
         while True:
             try:
                 choice = int(input("Enter a difficulty setting. (1-4): "))

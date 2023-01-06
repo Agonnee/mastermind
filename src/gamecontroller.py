@@ -32,10 +32,12 @@ class GameController:
         Uses the API Handler to generate code, and the UI to display the game rules.
         Returns the str "answer" which is the secret code for the game.
         """
-        
+
         self.ui.display_rules()
         difficulty_setting = self.ui.choose_difficulty()
-        answer = self.api_handler.get_code(difficulty_setting.code_length, difficulty_setting.digit_max)
+        answer = self.api_handler.get_code(
+            difficulty_setting.code_length, difficulty_setting.digit_max
+        )
         return answer
 
     def turn(self, guess_number: int, answer: str) -> bool:

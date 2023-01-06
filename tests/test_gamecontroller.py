@@ -25,7 +25,7 @@ def test_game_start(monkeypatch: MonkeyPatch) -> None:
 
 
 def test_play_game_win(monkeypatch: MonkeyPatch) -> None:
-    
+
     input_values = ["1", "Test_Name", "9999", "n"]
     test_answer = "9999"
     monkeypatch.setattr("builtins.input", lambda _: input_values.pop(0))
@@ -34,14 +34,30 @@ def test_play_game_win(monkeypatch: MonkeyPatch) -> None:
     controller = GameController(API_Handler(), Cli())
     controller.play_game()
 
+
 def test_play_game_lose(monkeypatch: MonkeyPatch) -> None:
-    input_values = ["1", "Test_Name", "9998", "9998", "9998", "9998", "9998", "9998", "9998", "9998", "9998", "9998", "n"]
+    input_values = [
+        "1",
+        "Test_Name",
+        "9998",
+        "9998",
+        "9998",
+        "9998",
+        "9998",
+        "9998",
+        "9998",
+        "9998",
+        "9998",
+        "9998",
+        "n",
+    ]
     test_answer = "9999"
     monkeypatch.setattr("builtins.input", lambda _: input_values.pop(0))
     monkeypatch.setattr(API_Handler, "get_code", lambda _, __, ___: test_answer)
 
     controller = GameController(API_Handler(), Cli())
     controller.play_game()
+
 
 def test_turn_match(monkeypatch: MonkeyPatch) -> None:
     input_value = "0000"
@@ -79,7 +95,6 @@ def test_turn_wrong(monkeypatch: MonkeyPatch) -> None:
         ("1234", "5423", 0, 3),
         ("1234", "6543", 0, 2),
         ("1235", "7654", 0, 1),
-
     ],
 )
 def test_compare_guess_to_answer(
