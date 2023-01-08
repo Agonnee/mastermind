@@ -14,5 +14,5 @@ class Difficulty(str, Enum):
 
     EASY = ("Easy", 4, 7)
     MEDIUM = ("Medium", 4, 9)
-    HARD = ("Hard", 6, 9)
-    VERY_HARD = ("Very Hard", 8, 9)
+    HARD = ("Hard", 5, 9)
+    VERY_HARD = ("Very Hard", 6, 9)

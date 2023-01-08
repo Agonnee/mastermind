@@ -2,32 +2,43 @@ from dataclasses import dataclass
 
 from src.api_handler import API_Handler
 from src.ui import UI
+from src.scoreboard import Scorekeeper
+from src.difficulty import Difficulty
 
 
 @dataclass
 class GameController:
     api_handler: API_Handler
     ui: UI
+    scorekeeper: Scorekeeper
 
     def play_game(self) -> bool:
         """Handles Ordering Game controller functions"""
 
-        answer = self.game_start()
+        answer, difficulty_setting = self.game_start()
         username = self.ui.pick_player_name()
         game_won = False
         for i in range(10):
             game_won = self.turn(i + 1, answer)
             if game_won:
                 self.ui.display_win(answer, username, i + 1)
+                self.scorekeeper.record_score(username, difficulty_setting.value, i + 1)
                 break
 
         if not game_won:
             self.ui.display_loss(answer, username)
 
+        display_score = self.ui.prompt_for_scoreboard()
+        if display_score:
+            scores_to_display = self.scorekeeper.get_scores(difficulty_setting.value)
+            self.ui.display_scores(scores_to_display, difficulty_setting.value)
+        self.scorekeeper.save_scores()
+
+
         replay = self.ui.prompt_play_again()
         return replay
 
-    def game_start(self) -> str:
+    def game_start(self) -> tuple[str, Difficulty]:
         """
         Uses the API Handler to generate code, and the UI to display the game rules.
         Returns the str "answer" which is the secret code for the game.
@@ -38,7 +49,7 @@ class GameController:
         answer = self.api_handler.get_code(
             difficulty_setting.code_length, difficulty_setting.digit_max
         )
-        return answer
+        return answer, difficulty_setting
 
     def turn(self, guess_number: int, answer: str) -> bool:
         """

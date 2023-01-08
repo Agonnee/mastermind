@@ -92,8 +92,26 @@ class Cli:
     def prompt_play_again(self) -> bool:
         """Prompt Player for whether they'd like to play again or not"""
 
-        play_again = input(f"Would you like to play again? (Y/n) ")
+        play_again = input(f"Would you like to play again? (y/N) ")
         if play_again.lower() in ["y", "yeah", "yes"]:
             return True
         else:
             return False
+
+    def prompt_for_scoreboard(self) -> bool:
+        """Prompt Player for whether they'd like to view the scoreboard or not"""
+        
+        view_scores = input(f"Would you like to view the Scoreboard? (y/N) ")
+        if view_scores.lower() in ["y", "yeah", "yes"]:
+            return True
+        else:
+            return False
+
+    def display_scores(self, scores:list[tuple], difficulty_name) -> None:
+        """Display scores provided from the scoreboard"""
+
+        print("================================================")
+        print(f"Best Scores: {difficulty_name}")
+        for count, i in enumerate(scores[:5], 1):
+            print(f"{count}. {i[0]}: {i[1]}")
+        print("================================================")

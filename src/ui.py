@@ -42,3 +42,13 @@ class UI(Protocol):
         """Prompt player for whether they'd like to play again or not."""
 
         raise NotImplementedError()
+
+    def prompt_for_scoreboard(self) -> bool:
+        """Prompt Player for whether they'd like to view the scoreboard or not"""
+
+        raise NotImplementedError()
+
+    def display_scores(self, scores) -> None:
+        """Display scores provided from the scoreboard"""
+
+        raise NotImplementedError()

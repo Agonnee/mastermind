@@ -90,5 +90,5 @@ I decided that having the CLI print statements and prompting for input was causi
 
 As an additional feature, I wanted to add a difficulty setting. The difficulty setting would change the number of digits in the code and the range of numbers possible for each digit. In order to make this modular I created the Difficulty Enum so that difficulties could be added or modified without much effort by editing the values of difficulty.
 
-Currently, I'm planning on adding a scoring system to record the best score (least number of guesses) a player has acheived per difficulty and a leaderboard for the different difficulties.
+I added a scoring system to track the local user scores for the game at each difficulty. The system saves to the data directory in the repo into a file named scores.json. The first time the game is played, the file will be created and saved. For unplayed difficulties, the unreachable score of 11 turns is stored, and the UI will not display scores above 10 when the leaderboard is shown.
 
