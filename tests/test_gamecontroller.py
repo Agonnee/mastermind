@@ -9,7 +9,7 @@ import pytest
 
 
 def test_game_start(monkeypatch: MonkeyPatch, tmp_path) -> None:
-    controller = GameController(API_Handler(), Cli(), Scorekeeper(save_path = tmp_path))
+    controller = GameController(API_Handler(), Cli(), Scorekeeper(save_path=tmp_path))
 
     API_URL = "https://www.random.org/integers/?num=4&min=0&max=7&col=1&base=10&format=plain&rnd=new"
 
@@ -32,7 +32,7 @@ def test_play_game_win(monkeypatch: MonkeyPatch, tmp_path) -> None:
     monkeypatch.setattr("builtins.input", lambda _: input_values.pop(0))
     monkeypatch.setattr(API_Handler, "get_code", lambda _, __, ___: test_answer)
 
-    controller = GameController(API_Handler(), Cli(), Scorekeeper(save_path = tmp_path))
+    controller = GameController(API_Handler(), Cli(), Scorekeeper(save_path=tmp_path))
     controller.play_game()
 
 
@@ -51,27 +51,27 @@ def test_play_game_lose(monkeypatch: MonkeyPatch, tmp_path) -> None:
         "9998",
         "9998",
         "n",
-        "n"
+        "n",
     ]
     test_answer = "9999"
     monkeypatch.setattr("builtins.input", lambda _: input_values.pop(0))
     monkeypatch.setattr(API_Handler, "get_code", lambda _, __, ___: test_answer)
 
-    controller = GameController(API_Handler(), Cli(), Scorekeeper(save_path = tmp_path))
+    controller = GameController(API_Handler(), Cli(), Scorekeeper(save_path=tmp_path))
     controller.play_game()
 
 
 def test_turn_match(monkeypatch: MonkeyPatch, tmp_path) -> None:
     input_value = "0000"
     monkeypatch.setattr("builtins.input", lambda _: input_value)
-    controller = GameController(API_Handler(), Cli(), Scorekeeper(save_path = tmp_path))
+    controller = GameController(API_Handler(), Cli(), Scorekeeper(save_path=tmp_path))
     assert controller.turn(1, "0000") == True
 
 
 def test_turn_wrong(monkeypatch: MonkeyPatch, tmp_path) -> None:
     input_value = "0000"
     monkeypatch.setattr("builtins.input", lambda _: input_value)
-    controller = GameController(API_Handler(), Cli(), Scorekeeper(save_path = tmp_path))
+    controller = GameController(API_Handler(), Cli(), Scorekeeper(save_path=tmp_path))
     assert controller.turn(1, "0001") == False
 
 
@@ -100,8 +100,8 @@ def test_turn_wrong(monkeypatch: MonkeyPatch, tmp_path) -> None:
     ],
 )
 def test_compare_guess_to_answer(
-    guess_input, answer_input, cor_right_loc, cor_wrong_loc,tmp_path
+    guess_input, answer_input, cor_right_loc, cor_wrong_loc, tmp_path
 ):
-    controller = GameController(API_Handler(), Cli(), Scorekeeper(save_path = tmp_path))
+    controller = GameController(API_Handler(), Cli(), Scorekeeper(save_path=tmp_path))
     a, b = controller.compare_guess_to_answer(guess_input, answer_input)
     assert (a, b) == (cor_right_loc, cor_wrong_loc)

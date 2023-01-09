@@ -4,16 +4,45 @@ from src.difficulty import Difficulty
 class Cli:
     """Implementing the UI Protocol to create simple CLI"""
 
-    def choose_difficulty(self) -> Difficulty:
+    def display_menu(self) -> str:
+        """Prompt the Player for Menu Options: Play, Scoreboard, Exit"""
+        menu_options = ["Play Game", "Scoreboard", "Exit"]
+
+        print("\n")
+        print("Mastermind")
+        print("================================================")
+        print("Main Menu:")
+        for count, i in enumerate(menu_options, 1):
+            print(f"{count}. {i}")
+        print("================================================")
+        while True:
+            try:
+                choice = int(input("Enter selection. (1-3): "))
+                if 0 < choice < len(menu_options) + 1:
+                    return choice
+                else:
+                    print("Please choose a valid selection.")
+            except ValueError:
+                print("Please choose a valid selection.")
+
+    def choose_difficulty(self, game_display=False) -> Difficulty:
         """
         Prompt the Player for a difficulty setting for the game.
         Returns a Difficulty obj from the difficulty enum
         """
+
+        print("\n")
         print("Difficulty selection:")
-        for count, i in enumerate(Difficulty, 1):
-            print(
-                f"{count}. {i.value}, {i.code_length} digit code with digits ranging 0-{i.digit_max}"
-            )
+        print("================================================")
+        if game_display:
+            for count, i in enumerate(Difficulty, 1):
+                print(
+                    f"{count}. {i.value}, {i.code_length} digit code with digits ranging 0-{i.digit_max}"
+                )
+        else:
+            for count, i in enumerate(Difficulty, 1):
+                print(f"{count}. {i.value}")
+        print("================================================")
         while True:
             try:
                 choice = int(input("Enter a difficulty setting. (1-4): "))
@@ -25,6 +54,7 @@ class Cli:
     def display_rules(self) -> None:
         """Print the Games rules at the beginning of the game"""
 
+        print("\n")
         print("================================================")
         print("Welcome to Mastermind!")
         print("You are tasked with cracking the secret code!")
@@ -60,8 +90,9 @@ class Cli:
     def display_feedback(self, correct_right_loc: int, correct_wrong_loc: int) -> None:
         """Display the feedback clues from the guess/answer comparison to the player."""
 
-        print("================================================")
+        print("\n")
         print("Guess Feedback:")
+        print("================================================")
         print(
             f"You guessed {correct_right_loc} digits correctly in the right location."
         )
@@ -100,18 +131,20 @@ class Cli:
 
     def prompt_for_scoreboard(self) -> bool:
         """Prompt Player for whether they'd like to view the scoreboard or not"""
-        
+
         view_scores = input(f"Would you like to view the Scoreboard? (y/N) ")
         if view_scores.lower() in ["y", "yeah", "yes"]:
             return True
         else:
             return False
 
-    def display_scores(self, scores:list[tuple], difficulty_name) -> None:
+    def display_scores(self, scores: list[tuple], difficulty_name) -> None:
         """Display scores provided from the scoreboard"""
 
-        print("================================================")
+        print("\n")
         print(f"Best Scores: {difficulty_name}")
+        print("================================================")
         for count, i in enumerate(scores[:5], 1):
             print(f"{count}. {i[0]}: {i[1]}")
         print("================================================")
+        _ = input("Press Enter to Continue.")

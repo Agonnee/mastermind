@@ -97,3 +97,5 @@ I decided that having the CLI print statements and prompting for input was causi
    python mastermind.py -p
    ```
 
+- The last feature I added was a main menu in order to allow for checking the scoreboard or gracefully exiting the game without playing through a round of the game. This is a minor change overall, but I felt it was needed to complete the feeling of the game. If you've read this far, thank you and I hope you will check out some of my future projects!
+

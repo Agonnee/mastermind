@@ -1,3 +1,4 @@
+import sys
 from dataclasses import dataclass
 
 from src.api_handler import API_Handler
@@ -11,6 +12,21 @@ class GameController:
     api_handler: API_Handler
     ui: UI
     scorekeeper: Scorekeeper
+
+    def main_menu(self) -> None:
+        """Handles Main Menu logic upon game start"""
+        selection = self.ui.display_menu()
+
+        if selection == 1:
+            replay = True
+            while replay:
+                replay = self.play_game()
+        elif selection == 2:
+            scoreboard_difficulty = self.ui.choose_difficulty()
+            scores_to_display = self.scorekeeper.get_scores(scoreboard_difficulty.value)
+            self.ui.display_scores(scores_to_display, scoreboard_difficulty.value)
+        elif selection == 3:
+            sys.exit()
 
     def play_game(self) -> bool:
         """Handles Ordering Game controller functions"""
@@ -34,7 +50,6 @@ class GameController:
             self.ui.display_scores(scores_to_display, difficulty_setting.value)
         self.scorekeeper.save_scores()
 
-
         replay = self.ui.prompt_play_again()
         return replay
 
@@ -45,7 +60,7 @@ class GameController:
         """
 
         self.ui.display_rules()
-        difficulty_setting = self.ui.choose_difficulty()
+        difficulty_setting = self.ui.choose_difficulty(game_display=True)
         answer = self.api_handler.get_code(
             difficulty_setting.code_length, difficulty_setting.digit_max
         )

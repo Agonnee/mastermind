@@ -6,7 +6,9 @@ class Difficulty(str, Enum):
     code_length: int
     digit_max: int
 
-    def __new__(cls, title: str, pl_name: str, code_length: int = 0, digit_max: int = 0):
+    def __new__(
+        cls, title: str, pl_name: str, code_length: int = 0, digit_max: int = 0
+    ):
         obj = str.__new__(cls, title)
         obj._value_ = title
         obj.pl_name = pl_name

@@ -4,16 +4,45 @@ from src.difficulty import Difficulty
 class pl_Cli:
     """Example of implementation of another UI instead of the standard CLI based on the UI Protocol"""
 
-    def choose_difficulty(self) -> Difficulty:
+    def display_menu(self) -> str:
+        """Prompt the Player for Menu Options: Play, Scoreboard, Exit"""
+        menu_options = ["Ayplay Amegay", "Oreboardscay", "Exitay"]
+
+        print("\n")
+        print("Astermindmay")
+        print("================================================")
+        print("Ainmay Enumay:")
+        for count, i in enumerate(menu_options, 1):
+            print(f"{count}. {i}")
+        print("================================================")
+        while True:
+            try:
+                choice = int(input("Enteray Electionsay. (1-3): "))
+                if 0 < choice < len(menu_options) + 1:
+                    return choice
+                else:
+                    print("Easeplay oosechay ayay alidvay electionsay.")
+            except ValueError:
+                print("Easeplay oosechay ayay alidvay electionsay.")
+
+    def choose_difficulty(self, game_display=False) -> Difficulty:
         """
         Prompt the Player for a difficulty setting for the game.
         Returns a Difficulty obj from the difficulty enum
         """
+
+        print("\n")
         print("Ifficultyday Electionsay:")
-        for count, i in enumerate(Difficulty, 1):
-            print(
-                f"{count}. {i.pl_name}, {i.code_length} igitday odecay ithway igitsday angingray 0-{i.digit_max}"
-            )
+        print("================================================")
+        if game_display:
+            for count, i in enumerate(Difficulty, 1):
+                print(
+                    f"{count}. {i.pl_name}, {i.code_length} igitday odecay ithway igitsday angingray 0-{i.digit_max}"
+                )
+        else:
+            for count, i in enumerate(Difficulty, 1):
+                print(f"{count}. {i.pl_name}")
+        print("================================================")
         while True:
             try:
                 choice = int(input("Enteryay ayay ifficultyday ettingsay. (1-4): "))
@@ -25,11 +54,14 @@ class pl_Cli:
     def display_rules(self) -> None:
         """Print the Games rules at the beginning of the game"""
 
+        print("\n")
         print("================================================")
         print("Elcomeway otay Astermindmay!")
         print("Ouyay areyay askedtay ithway ackingcray ethay ecretsay odecay!")
         print("Otenay , erethay aymay ebay uplicateday umbersnay inyay ethay odecay.")
-        print("Afteryay eachyay uessgay , ou'llyay eceiveray eedbackfay onyay ouryay uessgay")
+        print(
+            "Afteryay eachyay uessgay , ou'llyay eceiveray eedbackfay onyay ouryay uessgay"
+        )
         print("Usingyay ethay eedbackfay , igurefay outyay ethay ecretsay odecay!")
         print("Ebay arnedway , ouyay onlyyay avehay 10 uessesgay...")
         print("================================================")
@@ -40,7 +72,9 @@ class pl_Cli:
 
         print("\n")
         print("================================================")
-        print("Unfortunatelyyay , ouyay idday otnay uccessfullysay ackcray ethay odecay.")
+        print(
+            "Unfortunatelyyay , ouyay idday otnay uccessfullysay ackcray ethay odecay."
+        )
         print(f"Orfay ouryay informationyay , ethay odecay asway {answer}.")
         print(f"Aybemay ou'llyay avehay etterbay ucklay extnay imetay {username}.")
         print("================================================")
@@ -52,16 +86,21 @@ class pl_Cli:
         print("\n")
         print("================================================")
         print(f"Ongratulationscay {username}, ouyay ackedcray ethay odecay!")
-        print(f"Ouyay ereway ableyay otay uessgay {answer} inyay onlyyay {guess_number} iestray!")
-        print(f"Aybemay ouyay ouldshay ytray otay eesay ifyay ouyay ancay eatbay atthay orescay.")
+        print(
+            f"Ouyay ereway ableyay otay uessgay {answer} inyay onlyyay {guess_number} iestray!"
+        )
+        print(
+            f"Aybemay ouyay ouldshay ytray otay eesay ifyay ouyay ancay eatbay atthay orescay."
+        )
         print("================================================")
         print("\n")
 
     def display_feedback(self, correct_right_loc: int, correct_wrong_loc: int) -> None:
         """Display the feedback clues from the guess/answer comparison to the player."""
 
-        print("================================================")
+        print("\n")
         print("Uessgay Eedbackfay:")
+        print("================================================")
         print(
             f"Ouyay uessedgay {correct_right_loc} igitsday orrectlycay inyay ethay ightray ocationlay."
         )
@@ -100,18 +139,22 @@ class pl_Cli:
 
     def prompt_for_scoreboard(self) -> bool:
         """Prompt Player for whether they'd like to view the scoreboard or not"""
-        
-        view_scores = input(f"Ouldway ouyay ikelay otay iewvay ethay oreboardscay? (y/N) ")
+
+        view_scores = input(
+            f"Ouldway ouyay ikelay otay iewvay ethay oreboardscay? (y/N) "
+        )
         if view_scores.lower() in ["y", "yeah", "yes", "esyay", "eahyay"]:
             return True
         else:
             return False
 
-    def display_scores(self, scores:list[tuple], difficulty_name) -> None:
+    def display_scores(self, scores: list[tuple], difficulty_name) -> None:
         """Display scores provided from the scoreboard"""
 
-        print("================================================")
+        print("\n")
         print(f"Estbay Oresscay: {difficulty_name}")
+        print("================================================")
         for count, i in enumerate(scores[:5], 1):
             print(f"{count}. {i[0]}: {i[1]}")
         print("================================================")
+        _ = input("Esspray Enteryay otay Ontinuecay.")

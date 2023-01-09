@@ -3,11 +3,18 @@ from src.difficulty import Difficulty
 
 
 class UI(Protocol):
+    def display_menu(self) -> str:
+        """Prompt the Player for Menu Options: Play, Scoreboard, Exit"""
+
+        raise NotImplementedError()
+
     def choose_difficulty(self) -> Difficulty:
         """
         Prompt the Player for a difficulty setting for the game.
         Returns a Difficulty obj from the difficulty enum
         """
+
+        raise NotImplementedError()
 
     def display_rules(self) -> None:
         """Display the Game rules upon start"""
