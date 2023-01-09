@@ -84,11 +84,16 @@ To go along with the Guess and Check system, I needed the command line interface
 
 Once I got the initial structure built up, I decided it was time to start writing the tests for the project. This would both allow me to check what I miss or break as I refactor or build more features without having to manually play through the game over and over. I needed to start making sure errors were handled along the way. The most likely cause of an error would be from the API call, so I wrote tests and added error handling into the API_Handler class.
 
-I decided that having the CLI print statements and prompting for input was causing a lot of unnecessary complexity to the Gamecontroller's logic. I created a separate CLI class and UI protocol in order to separate out the front end of the game. I used the UI Protocol class in order to build the project in a way so that the CLI class wouldn't be the only option. It allows for the possibility of extension of the game to different UIs or even for localization of the UI through creating multiple different CLI classes. In the future I would like to provide an example of this in the project.
+I decided that having the CLI print statements and prompting for input was causing a lot of unnecessary complexity to the Gamecontroller's logic. I created a separate CLI class and UI protocol in order to separate out the front end of the game. I used the UI Protocol class in order to build the project in a way so that the CLI class wouldn't be the only option. It allows for the possibility of extension of the game to different UIs or even for localization of the UI through creating multiple different CLI classes.
 
 ### Additional Features and Settings
 
-As an additional feature, I wanted to add a difficulty setting. The difficulty setting would change the number of digits in the code and the range of numbers possible for each digit. In order to make this modular I created the Difficulty Enum so that difficulties could be added or modified without much effort by editing the values of difficulty.
+- As an additional feature, I wanted to add a difficulty setting. The difficulty setting would change the number of digits in the code and the range of numbers possible for each digit. In order to make this modular I created the Difficulty Enum so that difficulties could be added or modified without much effort by editing the values of difficulty.
 
-I added a scoring system to track the local user scores for the game at each difficulty. The system saves to the data directory in the repo into a file named scores.json. The first time the game is played, the file will be created and saved. For unplayed difficulties, the unreachable score of 11 turns is stored, and the UI will not display scores above 10 when the leaderboard is shown.
+- I added a scoring system to track the local user scores for the game at each difficulty. The system saves to the data directory in the repo into a file named scores.json. The first time the game is played, the file will be created and saved. For unplayed difficulties, the unreachable score of 11 turns is stored, and the UI will not display scores above 10 when the leaderboard is shown.
+
+- In order to display how the UI.py protocol class allows for extensibility I've created an additional CLI class that is in Pig Latin. Pig Latin is a language game or argot in which has been used for centuries and has even been referenced by Shakespeare. (For more information on Pig Latin you can read here: https://en.wikipedia.org/wiki/Pig_Latin). This method of providing additional user interfaces based on passed command line arguments could be used for localization of the CLI or to provide exstensibility to a GUI. In order to play the game using the Pig Latin CLI you can run the command below in the place of the one provided in the "Playing the Game" section.
+   ```bash
+   python mastermind.py -p
+   ```
 
