@@ -102,6 +102,16 @@ class Cli:
         print("================================================")
         print("\n")
 
+    def display_all_wrong(self) -> None:
+        """Display 'All digits incorrect' in lieu of feedback."""
+
+        print("\n")
+        print("Guess Feedback:")
+        print("================================================")
+        print("All digits were incorrect.")
+        print("================================================")
+        print("\n")
+
     def pick_player_name(self) -> str:
         """Prompt player for input to set username"""
 

@@ -77,7 +77,10 @@ class GameController:
         correct_right_loc, correct_wrong_loc = self.compare_guess_to_answer(
             guess, answer
         )
-        if correct_right_loc == answer_len:
+        if (correct_right_loc == 0) and (correct_wrong_loc == 0):
+            self.ui.display_all_wrong()
+            return False
+        elif correct_right_loc == answer_len:
             return True
         self.ui.display_feedback(correct_right_loc, correct_wrong_loc)
         return False
