@@ -5,6 +5,33 @@ from pytest import MonkeyPatch
 
 import pytest
 
+def test_display_menu_play(monkeypatch: MonkeyPatch) -> None:
+    test_cli = Cli()
+    input_value = "1"
+    monkeypatch.setattr("builtins.input", lambda _: input_value)
+    choice = test_cli.display_menu()
+    assert choice == 1
+
+def test_display_menu_scoreboard(monkeypatch: MonkeyPatch) -> None:
+    test_cli = Cli()
+    input_value = "2"
+    monkeypatch.setattr("builtins.input", lambda _: input_value)
+    choice = test_cli.display_menu()
+    assert choice == 2
+
+def test_display_menu_exit(monkeypatch: MonkeyPatch) -> None:
+    test_cli = Cli()
+    input_value = "3"
+    monkeypatch.setattr("builtins.input", lambda _: input_value)
+    choice = test_cli.display_menu()
+    assert choice == 3
+
+def test_display_menu_invalid_first(monkeypatch: MonkeyPatch) -> None:
+    test_cli = Cli()
+    input_values = ["4", "4", "1"]
+    monkeypatch.setattr("builtins.input", lambda _: input_values.pop(0))
+    choice = test_cli.display_menu()
+    assert choice == 1
 
 def test_pick_play_name(monkeypatch: MonkeyPatch) -> None:
     test_cli = Cli()

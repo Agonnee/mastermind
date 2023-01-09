@@ -7,6 +7,19 @@ from pytest import MonkeyPatch
 import requests_mock
 import pytest
 
+def test_main_menu(monkeypatch: MonkeyPatch, tmp_path) -> None:
+    controller = GameController(API_Handler(), Cli(), Scorekeeper(save_path=tmp_path))
+    input_values = ["1", ""]
+    selections_list = [1, 2, 3]
+    monkeypatch.setattr("builtins.input", lambda _: input_values.pop(0))
+    monkeypatch.setattr(Cli, "display_menu", lambda _: selections_list.pop(0))
+    monkeypatch.setattr(GameController, "play_game", lambda _: False)
+    controller.main_menu()
+    controller.main_menu()
+    with pytest.raises(SystemExit):
+        controller.main_menu()
+
+
 
 def test_game_start(monkeypatch: MonkeyPatch, tmp_path) -> None:
     controller = GameController(API_Handler(), Cli(), Scorekeeper(save_path=tmp_path))
@@ -15,7 +28,7 @@ def test_game_start(monkeypatch: MonkeyPatch, tmp_path) -> None:
 
     body_text = "0\n0\n0\n1\n\n"
 
-    input_values = ["1", "Test_Name"]
+    input_values = ["1", "1", "Test_Name"]
     monkeypatch.setattr("builtins.input", lambda _: input_values.pop(0))
 
     with requests_mock.Mocker() as mocker:
@@ -27,7 +40,7 @@ def test_game_start(monkeypatch: MonkeyPatch, tmp_path) -> None:
 
 def test_play_game_win(monkeypatch: MonkeyPatch, tmp_path) -> None:
 
-    input_values = ["1", "Test_Name", "9999", "n", "n"]
+    input_values = ["1", "1", "Test_Name", "9999", "n", "n"]
     test_answer = "9999"
     monkeypatch.setattr("builtins.input", lambda _: input_values.pop(0))
     monkeypatch.setattr(API_Handler, "get_code", lambda _, __, ___: test_answer)
@@ -38,6 +51,7 @@ def test_play_game_win(monkeypatch: MonkeyPatch, tmp_path) -> None:
 
 def test_play_game_lose(monkeypatch: MonkeyPatch, tmp_path) -> None:
     input_values = [
+        "1",
         "1",
         "Test_Name",
         "9998",
@@ -50,7 +64,8 @@ def test_play_game_lose(monkeypatch: MonkeyPatch, tmp_path) -> None:
         "9998",
         "9998",
         "9998",
-        "n",
+        "y",
+        "",
         "n",
     ]
     test_answer = "9999"
